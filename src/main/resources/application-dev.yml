@@ -4,7 +4,7 @@ app:
   # 数据库地址
   database:
     name: text
-    ip: 192.168.42.133
+    ip: 192.168.42.134
     username: root
     password: 123456
   #id生成器snowflake算法的配置文件
@@ -75,4 +75,15 @@ spring:
     restart:
       enabled: true
       additional-paths: src/main/java
-
+  rabbitmq:
+    host: 192.168.42.134
+    port: 5672
+    username: guest
+    password: guest
+management:
+  endpoints:
+    web:
+      exposure:
+        include: metrics
+    shutdown:
+      enabled: true
