@@ -1,9 +1,6 @@
 package com.example.demo.controller;
 
 import com.example.demo.common.model.AjaxResult;
-import com.example.demo.entity.PostinfoEntity;
-import com.example.demo.service.PostInfoService;
-import com.example.demo.service.TypeInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -23,7 +20,7 @@ import java.util.Map;
 public class PostInfoController  extends ControllerBase{
 
 
-    @Autowired
+   /* @Autowired
     private PostInfoService postInfoService;
     @GetMapping("/postInfos/{tid}")
     public Object getPostInfoList(@PathVariable(name = "tid") Integer tid,Pageable pageable){
@@ -33,7 +30,7 @@ public class PostInfoController  extends ControllerBase{
     }
 
 
-    /*@GetMapping("/postInfos/{tid}")
+    *//*@GetMapping("/postInfos/{tid}")
     public String getPostInfoListExcel(@PathVariable(name = "tid") Integer tid,Pageable pageable){
 
         Page<PostinfoEntity> postInfoList = postInfoService.getPostInfoList(tid, pageable);
@@ -47,7 +44,7 @@ public class PostInfoController  extends ControllerBase{
         }
 
         return  "";
-    }*/
+    }*//*
 
     @Autowired
     private TypeInfoService typeInfoService;
@@ -62,6 +59,6 @@ public class PostInfoController  extends ControllerBase{
             e.printStackTrace();
         }
         return  a;
-    }
+    }*/
 
 }
