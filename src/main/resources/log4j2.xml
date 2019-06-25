@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN">
+
+    <properties>
+        <!--统一定义保存日志文件根目录-->
+        <property name="LOG_HOME">../../logs/yunjinji-server/</property>
+    </properties>
+
+    <Appenders>
+        <!--控制台日志-->
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss SSS}|%t|%5p|%F.%M:%L|%m%n"/>
+        </Console>
+
+
+        <!-- 定期生成文件，默认是在文件后面追加 -->
+        <RollingRandomAccessFile name="info" append="true" fileName="${LOG_HOME}/info.log"
+                                 filePattern="${LOG_HOME}/info-%d{yyyy-MM-dd}.log">
+            <ThresholdFilter level="info" onMatch="ACCEPT" onMismatch="DENY"/>
+            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss SSS}|%t|%5p|%F.%M:%L|%m%n"/>
+            <Policies>
+                <!--按时间生成-->
+                <TimeBasedTriggeringPolicy interval="1" modulate="true"/>
+                <!--按大小生成-->
+                <!--<SizeBasedTriggeringPolicy size="10 MB" />-->
+            </Policies>
+            <!--最大生成天数-->
+            <DefaultRolloverStrategy max="30"/>
+        </RollingRandomAccessFile>
+
+
+        <!-- 定期生成文件，默认是在文件后面追加 -->
+        <RollingRandomAccessFile name="error" append="true" fileName="${LOG_HOME}/error.log"
+                                 filePattern="${LOG_HOME}/error-%d{yyyy-MM-dd}.log">
+            <ThresholdFilter level="error" onMatch="ACCEPT" onMismatch="DENY"/>
+            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss SSS}|%t|%5p|%F.%M:%L|%m%n"/>
+            <Policies>
+                <!--按时间生成-->
+                <TimeBasedTriggeringPolicy interval="1" modulate="true"/>
+                <!--按大小生成-->
+                <!--<SizeBasedTriggeringPolicy size="10 MB" />-->
+            </Policies>
+            <!--最大生成天数-->
+            <DefaultRolloverStrategy max="30"/>
+        </RollingRandomAccessFile>
+
+
+        <!-- 定期生成文件，默认是在文件后面追加 -->
+        <RollingRandomAccessFile name="warn" append="true" fileName="${LOG_HOME}/warn.log"
+                                 filePattern="${LOG_HOME}/warn-%d{yyyy-MM-dd}.log">
+            <ThresholdFilter level="warn" onMatch="ACCEPT" onMismatch="DENY"/>
+            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss SSS}|%t|%5p|%F.%M:%L|%m%n"/>
+            <Policies>
+                <!--按时间生成-->
+                <TimeBasedTriggeringPolicy interval="1" modulate="true"/>
+                <!--按大小生成-->
+                <!--<SizeBasedTriggeringPolicy size="10 MB" />-->
+            </Policies>
+            <!--最大生成天数-->
+            <DefaultRolloverStrategy max="30"/>
+        </RollingRandomAccessFile>
+
+
+    </Appenders>
+
+
+
+    <!--     然后定义logger，只有定义了logger并引入的appender，appender才会生效 -->
+    <Loggers>
+        <!-- 打印hibernate的info日志 -->
+        <Logger name="org.hibernate" level="info" additivity="false">
+            <AppenderRef ref="Console" />
+        </Logger>
+
+        <!-- 打印sql语句 -->
+        <Logger name="org.hibernate.SQL" level="debug" additivity="false">
+            <AppenderRef ref="Console" />
+        </Logger>
+
+        <!-- 打印sql语句的参数绑定 level必须为：trace-->
+        <Logger name="org.hibernate.type.descriptor.sql.BasicBinder" level="trace" additivity="false">
+            <AppenderRef ref="Console" />
+        </Logger>
+
+        <!-- 查询出来的结果集提取，如果嫌这个日志太多可以关掉 -->
+        <!--<Logger name="org.hibernate.type.descriptor.sql.BasicExtractor" level="trace" additivity="false">-->
+        <!--<AppenderRef ref="Console" />-->
+        <!--</Logger>-->
+
+
+        <!-- 建立一个默认的root的logger -->
+        <Root level="info">
+            <AppenderRef ref="Console" />
+            <AppenderRef ref="info"/>
+            <AppenderRef ref="warn"/>
+            <AppenderRef ref="error"/>
+        </Root>
+    </Loggers>
+</Configuration>

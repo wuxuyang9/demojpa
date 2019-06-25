@@ -5,6 +5,9 @@ package com.example.demo.repository;/**
 
 import com.example.demo.entity.ZuiDaiMa;
 import com.example.demo.entity.ZuiDaiMaSolr;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.solr.core.query.result.HighlightPage;
+import org.springframework.data.solr.repository.Highlight;
 import org.springframework.data.solr.repository.Query;
 import org.springframework.data.solr.repository.SolrCrudRepository;
 
@@ -20,5 +23,8 @@ import java.util.List;
 public interface ZuiDaiMaSolrRepository extends SolrCrudRepository<ZuiDaiMaSolr,Integer> {
 
     @Query(" title:*?0* ")
-    public List<ZuiDaiMaSolr> findByQueryAnnotation(String title);
+    List<ZuiDaiMaSolr> findByQueryAnnotation(String title);
+
+    @Highlight(prefix = "<em style='color: red'>", postfix = "</em>",fields = {"title"})
+    HighlightPage<ZuiDaiMaSolr> findZuiDaiMaSolrByTitleContaining(String title, Pageable pageable);
 }

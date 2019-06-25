@@ -17,6 +17,7 @@ import org.springframework.data.solr.repository.config.EnableSolrRepositories;
 public class DemojpaApplication {
 
 	public static void main(String[] args) {
+
 		SpringApplication.run(DemojpaApplication.class, args);
 	}
 

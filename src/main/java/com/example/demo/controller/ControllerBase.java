@@ -1,6 +1,8 @@
 package com.example.demo.controller;
 
 
+import com.example.demo.common.util.Assert;
+import com.example.demo.common.util.DateUtils;
 import com.example.demo.common.util.ExcelUtil;
 import com.example.demo.common.util.ObjectUtil;
 import org.apache.poi.ss.usermodel.Workbook;
@@ -11,6 +13,7 @@ import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.*;
 
 /**
@@ -78,6 +81,22 @@ public abstract  class ControllerBase {
 
     }
 
+    protected void exportExcelByWorkBook(Workbook workbook,String sheetName) throws IOException {
+        Assert.isNull(workbook,"");
+        HttpServletResponse response = ((ServletRequestAttributes) RequestContextHolder
+                .getRequestAttributes()).getResponse();
+        ServletOutputStream outputStream = response.getOutputStream();
+        response.setCharacterEncoding("utf-8");
+        String s = DateUtils.formatDate(new Date(), "yyyy-MM-dd");
+        sheetName=sheetName+s;
+        response.setHeader("Content-disposition", "attachment; filename="
+                + new String(sheetName.getBytes("utf-8"), StandardCharsets.ISO_8859_1) + ".xls");// 组装附件名称和格式
+
+        workbook.write(outputStream);
+        outputStream.flush();
+        outputStream.close();
+
+    }
 
    /* protected Integer currentUserId(HttpServletRequest request) {
         String tokenHeader = request.getHeader(TokenService.KEY);

@@ -18,6 +18,11 @@ spring:
     properties:
       hibernate:
         format_sql: true
+  cloud:
+      config:
+        profile: dev
+        label: master
+        uri: http://localhost:7001/
 
   #    hibernate:
   #      ddl-auto: update
@@ -80,7 +85,7 @@ spring:
         login-password: 123456
   data:
     solr:
-      host: http://192.168.70.128:8983/solr/
+      host: http://192.168.42.134:8983/solr/
 
 
 

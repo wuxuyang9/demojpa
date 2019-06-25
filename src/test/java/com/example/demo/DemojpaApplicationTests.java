@@ -18,6 +18,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.solr.core.query.result.HighlightPage;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.io.IOException;
@@ -52,7 +53,7 @@ public class DemojpaApplicationTests {
 
 	@Test
 	public void testJsoup() throws IOException {
-		Document doc = Jsoup.connect("http://www.zuidaima.com/share.htm")
+		Document doc = Jsoup.connect("http://www.zuidaima.com/share/p2-s1.htm")
 				.timeout(3000)
 				.get();
 
@@ -90,8 +91,18 @@ public class DemojpaApplicationTests {
         zuiDaiMaSolr.setUrl("urlll");
         ZuiDaiMaSolr save = zuiDaiMaSolrRepository.save(zuiDaiMaSolr);
         System.out.println(save.getId());*/
-        List<ZuiDaiMaSolr> text = zuiDaiMaSolrRepository.findByQueryAnnotation("JavaScript");
-        System.out.println(text.size());
+       /* List<ZuiDaiMaSolr> text = zuiDaiMaSolrRepository.findByQueryAnnotation("JavaScript");
+        System.out.println(text.size());*/
+
+      /* zuiDaiMaSolrRepository.findAll().forEach((a)->{
+           System.out.println(a.getTitle());
+       });
+*/
+        PageRequest pageRequest = new PageRequest(0,10);
+
+        HighlightPage<ZuiDaiMaSolr> result = zuiDaiMaSolrRepository.findZuiDaiMaSolrByTitleContaining("管理系统", pageRequest);
+        System.out.println(result.getContent());
+
     }
 
 

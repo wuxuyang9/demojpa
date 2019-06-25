@@ -4,7 +4,7 @@ app:
   # 数据库地址
   database:
     name: solr
-    ip: 192.168.70.128
+    ip: 192.168.42.134
     username: root
     password: 123456
   #id生成器snowflake算法的配置文件
@@ -76,7 +76,7 @@ spring:
       enabled: true
       additional-paths: src/main/java
   rabbitmq:
-    host:
+    host: 192.168.42.134
     port: 5672
     username: guest
     password: guest
