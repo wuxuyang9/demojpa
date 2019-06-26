@@ -25,6 +25,6 @@ public interface ZuiDaiMaSolrRepository extends SolrCrudRepository<ZuiDaiMaSolr,
     @Query(" title:*?0* ")
     List<ZuiDaiMaSolr> findByQueryAnnotation(String title);
 
-    @Highlight(prefix = "<em style='color: red'>", postfix = "</em>",fields = {"title"})
+    @Highlight(prefix = "<font color='red'>", postfix = "</font>")
     HighlightPage<ZuiDaiMaSolr> findZuiDaiMaSolrByTitleContaining(String title, Pageable pageable);
 }

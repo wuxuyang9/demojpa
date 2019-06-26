@@ -103,6 +103,7 @@ public class DemojpaApplicationTests {
         HighlightPage<ZuiDaiMaSolr> result = zuiDaiMaSolrRepository.findZuiDaiMaSolrByTitleContaining("管理系统", pageRequest);
         System.out.println(result.getContent());
 
+
     }
 
 
