@@ -20,7 +20,7 @@ import java.util.List;
  * @create: 2019-06-25 17:07
  **/
 
-public interface ZuiDaiMaSolrRepository extends SolrCrudRepository<ZuiDaiMaSolr,Integer> {
+public interface ZuiDaiMaSolrRepository extends SolrCrudRepository<ZuiDaiMaSolr,String> {
 
     @Query(" title:*?0* ")
     List<ZuiDaiMaSolr> findByQueryAnnotation(String title);
@@ -28,3 +28,6 @@ public interface ZuiDaiMaSolrRepository extends SolrCrudRepository<ZuiDaiMaSolr,
     @Highlight(prefix = "<font color='red'>", postfix = "</font>")
     HighlightPage<ZuiDaiMaSolr> findZuiDaiMaSolrByTitleContaining(String title, Pageable pageable);
 }
+
+
+

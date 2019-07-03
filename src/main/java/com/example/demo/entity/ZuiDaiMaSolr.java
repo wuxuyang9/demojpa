@@ -24,7 +24,7 @@ import java.io.Serializable;
 public class ZuiDaiMaSolr implements Serializable {
 
     @Field("id")
-    private Integer id;
+    private String id;
 
     @Field("title")
     private String title;
