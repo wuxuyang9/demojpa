@@ -25,18 +25,16 @@ import java.util.Date;
 @AllArgsConstructor
 @Entity
 @SelectBeforeUpdate
-@Table(name = "zuidaima")
 public class ZuiDaiMa implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Field("id")
     private Integer id;
 
-    @Field("title")
+
     private String title;
 
-    @Field("url")
+
     private String url;
 
 

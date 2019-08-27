@@ -5,6 +5,7 @@ package com.example.demo.repository;/**
 
 import com.example.demo.entity.ZuiDaiMa;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
 /**
  * @program: demojpa
@@ -13,5 +14,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * @create: 2019-06-25 11:57
  **/
 
-public interface ZuiDaiMaRepository extends JpaRepository<ZuiDaiMa,Integer> {
+public interface ZuiDaiMaRepository extends JpaRepository<ZuiDaiMa,Integer>, JpaSpecificationExecutor {
 }

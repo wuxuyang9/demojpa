@@ -16,6 +16,7 @@ import org.springframework.data.solr.core.query.result.HighlightPage;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -53,6 +54,38 @@ public class ZuiDaiMaServiceImpl implements ZuiDaiMaService {
     @SolrInsert
     public void insert(String str){
         System.out.println("ll");
+    }
+
+    @Override
+    public Page<ZuiDaiMa> findList(Pageable pageable) {
+        Page<ZuiDaiMa> all = zuiDaiMaRepository.findAll(pageable);
+        return all;
+    }
+
+    @Override
+    @Transactional
+    public ZuiDaiMa save(ZuiDaiMa zuiDaiMa) {
+        zuiDaiMa.setCreatetime(new Date());
+        zuiDaiMa.setUpdatetime(new Date());
+        return zuiDaiMaRepository.save(zuiDaiMa);
+    }
+
+    @Override
+    public ZuiDaiMa findById(Integer id) {
+        return zuiDaiMaRepository.findById(id).get();
+    }
+
+    @Override
+    @Transactional
+    public ZuiDaiMa updateZuiDaiMa(ZuiDaiMa zuiDaiMa) {
+        zuiDaiMa.setUpdatetime(new Date());
+        return zuiDaiMaRepository.save(zuiDaiMa);
+    }
+
+    @Override
+    @Transactional
+    public void deleteById(Integer id) {
+        zuiDaiMaRepository.deleteById(id);
     }
 
 

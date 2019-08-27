@@ -5,6 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.data.solr.core.SolrTemplate;
 import org.springframework.data.solr.repository.config.EnableSolrRepositories;
@@ -13,6 +14,7 @@ import org.springframework.data.solr.repository.config.EnableSolrRepositories;
 @ComponentScan("com.example")
 @EntityScan("com.example")
 @EnableJpaRepositories("com.example")
+@EnableJpaAuditing
 @EnableSolrRepositories("com.example.demo.repository")
 public class DemojpaApplication {
 

@@ -21,4 +21,14 @@ public interface ZuiDaiMaService {
     Page<ZuiDaiMaSolr> zuiDaiMaList(String title, Pageable pageable);
     void savaAll(List<ZuiDaiMa> list);
     void insert(String str);
+
+    Page<ZuiDaiMa> findList(Pageable pageable);
+
+    ZuiDaiMa save(ZuiDaiMa zuiDaiMa);
+
+    ZuiDaiMa findById(Integer id);
+
+    ZuiDaiMa updateZuiDaiMa(ZuiDaiMa zuiDaiMa);
+
+    void deleteById(Integer id);
 }

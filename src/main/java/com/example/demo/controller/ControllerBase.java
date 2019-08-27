@@ -1,11 +1,16 @@
 package com.example.demo.controller;
 
 
+import com.example.demo.common.exception.RException;
+import com.example.demo.common.model.CodeEnum;
 import com.example.demo.common.util.Assert;
 import com.example.demo.common.util.DateUtils;
 import com.example.demo.common.util.ExcelUtil;
 import com.example.demo.common.util.ObjectUtil;
 import org.apache.poi.ss.usermodel.Workbook;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
@@ -105,4 +110,27 @@ public abstract  class ControllerBase {
     }
 */
 
+
+    Pageable getPageable(Integer page, Integer size, String sort)
+    {
+        page = page == null || page < 1 ? 0 : --page;
+        size = size == null || size < 0 ? 20 : size;
+        sort = sort == null ? "id,desc" : sort;
+
+        String[] split = sort.split(",");
+        if (split.length < 2) {
+            throw new RException("排序规则解析错误", CodeEnum.EXCEPTION.getCode());
+        }
+
+        Pageable pageable;
+        try {
+            Sort.Direction direction = Sort.Direction.fromString(split[1]);
+            pageable = PageRequest.of(page, size, new Sort(direction, split[0]));
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new RException("排序规则解析错误", CodeEnum.EXCEPTION.getCode());
+        }
+
+        return pageable;
+    }
 }
