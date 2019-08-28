@@ -1,45 +1,42 @@
-package com.example.demo.entity;/**
- * @author user
- * @date 2019/6/25
- */
+package com.example.demo.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.apache.solr.client.solrj.beans.Field;
 import org.hibernate.annotations.SelectBeforeUpdate;
-import org.springframework.data.solr.core.mapping.SolrDocument;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 
-/**
- * @program: demojpa
- * @description:
- * @author: wxy
- * @create: 2019-06-25 11:53
- **/
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
 @SelectBeforeUpdate
-public class ZuiDaiMa implements Serializable {
+public class CarUpkeep implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    private String customerName;
 
-    private String title;
+    private String customerPhone;
 
+    private Integer vehicleModelId; // 车型Id
 
-    private String url;
+    private String upkeepOperation; // 保养业务
 
+    private Long cost; // 费用
+
+    private Date date; // 日期
 
     @Column(updatable = false)
     private Date createtime;
+
     private Date updatetime;
+
 
 }
