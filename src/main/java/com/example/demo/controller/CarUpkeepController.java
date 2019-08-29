@@ -3,6 +3,7 @@ package com.example.demo.controller;
 import com.example.demo.common.model.JsonResult;
 import com.example.demo.entity.CarUpkeep;
 import com.example.demo.entity.vo.CarUpkeepVo;
+import com.example.demo.entity.vo.CarUpkeepVo2;
 import com.example.demo.service.CarUpkeepService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -39,5 +40,25 @@ public class CarUpkeepController extends ControllerBase{
         Pageable pageable = this.getPageable(page, size, sort);
         Page<CarUpkeepVo> allList = carUpkeepService.findAllList(pageable);
         return JsonResult.success(allList);
+    }
+
+
+    @GetMapping("/{id}")
+    public Object getOne(@PathVariable(value = "id")Integer id){
+        CarUpkeepVo2 vo=carUpkeepService.findCarUpkeepVoById(id);
+
+        return JsonResult.success(vo);
+    }
+
+    @PutMapping("/")
+    public Object update(@RequestBody CarUpkeep carUpkeep){
+        CarUpkeep carUpkeep1=carUpkeepService.update(carUpkeep);
+        return JsonResult.success(carUpkeep1);
+    }
+
+    @DeleteMapping("/{id}")
+    public Object delete(@PathVariable(value = "id")Integer id){
+        carUpkeepService.deleteById(id);
+        return  JsonResult.success();
     }
 }

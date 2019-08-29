@@ -24,6 +24,7 @@ import org.springframework.data.solr.core.query.result.HighlightPage;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -124,7 +125,14 @@ public class DemojpaApplicationTests {
 
     @Test
     public void test3r(){
-	    zuiDaiMaServiceImpl.insert("123213");
+
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+
+        Date date = new Date(1566921600000L);
+
+        String format = simpleDateFormat.format(date);
+
+        System.out.println(format);
     }
 
 
