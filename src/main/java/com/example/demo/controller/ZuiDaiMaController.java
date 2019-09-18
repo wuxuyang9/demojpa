@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.solr.core.query.result.HighlightPage;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -21,7 +22,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/zuiDaiMa")
-@CrossOrigin("http://localhost:8080")
+//@CrossOrigin("http://localhost:8080")
 public class ZuiDaiMaController extends ControllerBase{
 
     @Autowired
@@ -65,5 +66,15 @@ public class ZuiDaiMaController extends ControllerBase{
     public Object delete(@PathVariable(value = "id")Integer id){
         zuiDaiMaService.deleteById(id);
         return JsonResult.success();
+    }
+
+    @GetMapping("/solrList")
+    public Object solrList(@RequestParam(required = false, defaultValue = "1") Integer page,
+                           @RequestParam(required = false, defaultValue = "20") Integer size,
+                           @RequestParam(required = false, defaultValue = "id,desc") String sort,@RequestParam(required = false,defaultValue = "") String title){
+
+        Pageable pageable = this.getPageable(page, size, sort);
+        HighlightPage pageData=zuiDaiMaService.solrList(pageable,title);
+        return JsonResult.success(pageData);
     }
 }

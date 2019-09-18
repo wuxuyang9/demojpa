@@ -11,6 +11,8 @@ import org.springframework.data.solr.repository.Highlight;
 import org.springframework.data.solr.repository.Query;
 import org.springframework.data.solr.repository.SolrCrudRepository;
 
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -25,7 +27,7 @@ public interface ZuiDaiMaSolrRepository extends SolrCrudRepository<ZuiDaiMaSolr,
     @Query(" title:*?0* ")
     List<ZuiDaiMaSolr> findByQueryAnnotation(String title);
 
-    @Highlight(prefix = "<font color='red'>", postfix = "</font>")
+    @Highlight(prefix = "<h1 color='red'>", postfix = "</h1>",fragsize=100)
     HighlightPage<ZuiDaiMaSolr> findZuiDaiMaSolrByTitleContaining(String title, Pageable pageable);
 }
 

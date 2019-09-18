@@ -9,15 +9,22 @@ import com.example.demo.entity.ZuiDaiMaSolr;
 import com.example.demo.repository.ZuiDaiMaRepository;
 import com.example.demo.repository.ZuiDaiMaSolrRepository;
 import com.example.demo.service.ZuiDaiMaService;
+import org.apache.solr.client.solrj.SolrClient;
+import org.apache.solr.client.solrj.SolrQuery;
+import org.apache.solr.client.solrj.SolrServerException;
+import org.apache.solr.client.solrj.response.QueryResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.solr.core.SolrTemplate;
 import org.springframework.data.solr.core.query.result.HighlightPage;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.io.IOException;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @program: demojpa
@@ -86,6 +93,35 @@ public class ZuiDaiMaServiceImpl implements ZuiDaiMaService {
     @Transactional
     public void deleteById(Integer id) {
         zuiDaiMaRepository.deleteById(id);
+    }
+
+    @Override
+    public HighlightPage solrList(Pageable pageable, String title) {
+        return zuiDaiMaSolrRepository.findZuiDaiMaSolrByTitleContaining(title,pageable);
+    }
+
+
+    @Autowired
+    private SolrClient client;
+
+    @Autowired
+    private SolrTemplate solrTemplate;
+    @Override
+    public List<ZuiDaiMaSolr> getListSerach(String kw) throws IOException, SolrServerException {
+
+
+        SolrQuery query = new SolrQuery();
+        query.setQuery("title:"+kw);
+        query.setHighlight(true);
+        query.addHighlightField("title");
+        query.setHighlightSimplePre("<font color='red'>");
+        query.setHighlightSimplePost("</font>");
+        query.setHighlightFragsize(100);
+        QueryResponse query1 = client.query(query);
+        List<ZuiDaiMaSolr> beans = query1.getBeans(ZuiDaiMaSolr.class);
+        Map<String, Map<String, List<String>>> highlighting = query1.getHighlighting();
+
+        return null;
     }
 
 

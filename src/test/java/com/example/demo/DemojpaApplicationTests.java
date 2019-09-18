@@ -12,6 +12,7 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +32,7 @@ import java.util.List;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
+@Ignore
 public class DemojpaApplicationTests {
 
 
@@ -115,10 +117,17 @@ public class DemojpaApplicationTests {
         HighlightPage<ZuiDaiMaSolr> result = zuiDaiMaSolrRepository.findZuiDaiMaSolrByTitleContaining("管理系统", pageRequest);
         System.out.println(result.getContent());*/
 
-        Iterable<ZuiDaiMaSolr> all = zuiDaiMaSolrRepository.findAll();
+       /* Iterable<ZuiDaiMaSolr> all = zuiDaiMaSolrRepository.findAll();
         all.forEach((a)->{
             System.out.println(a.getTitle());
-        });
+        });*/
+
+        ZuiDaiMaSolr zuiDaiMaSolr = new ZuiDaiMaSolr();
+        zuiDaiMaSolr.setId("123123");
+        zuiDaiMaSolr.setTitle("欧文lrving欧文");
+        zuiDaiMaSolr.setUrl("www.lrving.com");
+        ZuiDaiMaSolr save = zuiDaiMaSolrRepository.save(zuiDaiMaSolr);
+        System.out.println(save);
 
     }
 
@@ -126,14 +135,28 @@ public class DemojpaApplicationTests {
     @Test
     public void test3r(){
 
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+      /*  SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
         Date date = new Date(1566921600000L);
 
         String format = simpleDateFormat.format(date);
 
-        System.out.println(format);
+        System.out.println(format);*/
+
+
     }
 
+
+
+    @Test
+    public void getListSerach() {
+        try {
+            zuiDaiMaService.getListSerach("基于");
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (SolrServerException e) {
+            e.printStackTrace();
+        }
+    }
 
 }

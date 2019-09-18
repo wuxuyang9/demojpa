@@ -85,8 +85,12 @@ spring:
         login-password: 123456
   data:
     solr:
-      host: http://192.168.42.134:8983/solr/
+      host: http://192.168.70.130:8983/solr/
 
 
+  servlet:
+    multipart:
+      max-file-size: 1000MB
+      max-request-size: 1000MB
 
 
