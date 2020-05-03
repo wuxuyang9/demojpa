@@ -4,6 +4,8 @@ import com.example.demo.common.model.JsonResult;
 import com.example.demo.entity.Interviewer;
 import com.example.demo.service.InterviewerService;
 import com.example.demo.utils.FileUploadUtils;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.omg.CORBA.OBJ_ADAPTER;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -19,7 +21,7 @@ import java.io.IOException;
  * @author: wxy
  * @create: 2019-09-17 11:24
  **/
-
+@Api(value = "interviewer")
 @RestController
 @RequestMapping("/api/interviewer")
 public class InterviewerController extends ControllerBase{
@@ -50,6 +52,7 @@ public class InterviewerController extends ControllerBase{
 
 
     @PostMapping("/")
+    @ApiOperation(value = "新增信息", notes = "根据用户 id 获取用户信息", tags = "查询用户信息类")
     public Object save(@RequestBody Interviewer interviewer){
          Interviewer interviewer1=interviewerService.save(interviewer);
          return JsonResult.success(interviewer1);

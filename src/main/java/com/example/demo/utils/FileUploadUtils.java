@@ -17,7 +17,7 @@ public class FileUploadUtils {
     public static String uploadFile(byte[] byteFile, String ext_file) {
         // 拼接服务区的文件路径
         StringBuffer sbPath = new StringBuffer();
-        sbPath.append("http://192.168.70.130:8080");
+        sbPath.append("http://192.168.42.134:8080");
         try {
             String filePath = new ClassPathResource("fdfs_client.conf").getFile().getAbsolutePath();
             // 1、加载配置文件，配置文件中的内容就是 tracker 服务的地址。

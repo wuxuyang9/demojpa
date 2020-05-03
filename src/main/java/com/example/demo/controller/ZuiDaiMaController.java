@@ -38,7 +38,7 @@ public class ZuiDaiMaController extends ControllerBase{
     @GetMapping("/list")
     public  Object list(@RequestParam(required = false, defaultValue = "1") Integer page,
                         @RequestParam(required = false, defaultValue = "20") Integer size,
-                        @RequestParam(required = false, defaultValue = "createtime,desc") String sort){
+                        @RequestParam(required = false, defaultValue = "id,desc") String sort){
         Pageable pageable = this.getPageable(page, size, sort);
         Page<ZuiDaiMa> list = zuiDaiMaService.findList(pageable);
         return JsonResult.success(list);

@@ -2,6 +2,7 @@
 #1.使用feign作为服务调用
 #2.使用feign自带hystrix断路由
 
+
 server:
   port: 8081
 
@@ -85,7 +86,7 @@ spring:
         login-password: 123456
   data:
     solr:
-      host: http://192.168.70.130:8983/solr/
+      host: http://192.168.64.128:8983/solr/
 
 
   servlet:
