@@ -20,45 +20,6 @@ import java.util.Map;
 public class PostInfoController  extends ControllerBase{
 
 
-   /* @Autowired
-    private PostInfoService postInfoService;
-    @GetMapping("/postInfos/{tid}")
-    public Object getPostInfoList(@PathVariable(name = "tid") Integer tid,Pageable pageable){
 
-        Page<PostinfoEntity> postInfoList = postInfoService.getPostInfoList(tid, pageable);
-        return AjaxResult.ok().data(postInfoList.getContent()).total(postInfoList.getTotalElements());
-    }
-
-
-    *//*@GetMapping("/postInfos/{tid}")
-    public String getPostInfoListExcel(@PathVariable(name = "tid") Integer tid,Pageable pageable){
-
-        Page<PostinfoEntity> postInfoList = postInfoService.getPostInfoList(tid, pageable);
-        Map<String,String> cellName=new LinkedHashMap<>();
-        cellName.put("标题","posttitle");
-        cellName.put("手机号","utelephone");
-        try {
-            exportExcel(postInfoList.getContent(),cellName,"帖子信息");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        return  "";
-    }*//*
-
-    @Autowired
-    private TypeInfoService typeInfoService;
-
-    @PostMapping("/import")
-    public boolean addUser(@RequestParam("file") MultipartFile file) {
-        boolean a = false;
-        String fileName = file.getOriginalFilename();
-        try {
-            a = typeInfoService.batchImport(fileName, file);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return  a;
-    }*/
 
 }
