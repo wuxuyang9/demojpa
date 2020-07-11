@@ -32,7 +32,6 @@ import java.util.List;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-@Ignore
 public class DemojpaApplicationTests {
 
 
@@ -159,4 +158,22 @@ public class DemojpaApplicationTests {
         }
     }
 
+    @Test
+    public void testJsoup2() throws IOException {
+
+        Document doc = Jsoup.connect("https://china.nba.com/teams/schedule/#!/nets")
+                .data("query", "Java")
+                .userAgent("Mozilla")
+                .cookie("auth", "token")
+                .timeout(3000)
+                .post();
+
+        Elements tr = doc.select("tr");
+        Element element = tr.get(2);
+        System.out.println(element.text());
+    }
+    @Test
+    public void testJUnit(){
+        System.out.println("开始编写测试用例，使用junit框架");
+    }
 }
